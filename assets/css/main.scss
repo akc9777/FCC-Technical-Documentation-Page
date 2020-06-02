@@ -1,1 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@300;400;700&family=Source+Code+Pro&family=Source+Sans+Pro:wght@300;400&display=swap");
 
+$cl-primary: #358ccb;
+$cl-bg: #eee;
+$cl-text: #333;
+$cl-nav-text: #fff;
+
+$ff-heading: "Alegreya SC", serif;
+$ff-code: "Source Code Pro", monospace;
+$ff-body: "Source Sans Pro", sans-serif;
+
+$bp-desktop: 700px;
+
+// Mixins
+@mixin rest-button {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+@mixin reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@mixin reset-link {
+    text-decoration: none;
+}
+
+@mixin center-align-content($side-padding) {
+    padding: 0 $side-padding;
+    margin: 0 auto;
+}
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    transition: all ease-in-out 250ms;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    line-height: 150%;
+    font-family: $ff-body;
+}
+
+h1 {
+    font-family: $ff-heading;
+}
+
+nav {
+    background-color: $cl-primary;
+    color: $cl-nav-text;
+    padding: 1em 0;
+    height: 100vh;
+
+    h1 {
+        margin: 0;
+        text-align: center;
+        font-weight: 300;
+    }
+
+    ul {
+        @include reset-list();
+        width: fit-content;
+        margin: 0 auto;
+        padding: 1em 0 0;
+    }
+
+    a {
+        @include reset-link();
+        display: inline-block;
+        padding: 0.5em 2em;
+        width: 100%;
+
+        &:link {
+            color: $cl-nav-text;
+        }
+
+        &:visited {
+            color: $cl-nav-text;
+        }
+        &:hover {
+            color: $cl-primary;
+            background: $cl-nav-text;
+        }
+
+        &:active {
+            color: $cl-primary;
+            background: $cl-nav-text;
+        }
+    }
+}
+
+#main-doc {
+    @include center-align-content(5%);
+
+    .main-section {
+        padding-top: 2em;
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+
+    code[class*="language-"],
+    pre[class*="language-"] {
+        font-family: $ff-code;
+    }
+}
+
+@media (min-width: $bp-desktop) {
+    body {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+
+    nav {
+        grid-column: 1/2;
+    }
+
+    #main-doc {
+        grid-column: 2/3;
+        @include center-align-content(15%);
+        height: 100vh;
+        overflow-y: scroll;
+    }
+}
